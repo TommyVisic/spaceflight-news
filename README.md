@@ -16,7 +16,7 @@ A news feed app powered by the Spaceflight News API
 * Automatically fetches fresh data if cache is too old or if more articles are needed.
 * Handles loss of internet connection gracefully.
 * Loads article images with COIL.
-* Depedency injection with Dagger Hilt.
+* Dependency injection with Dagger Hilt.
 * Demonstrates MVVM architecture.
 * Demonstrates Kotlin Flows & Coroutines.
 * Works in dark & light modes (driven by the OS settings)
