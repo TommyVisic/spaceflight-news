@@ -7,7 +7,7 @@ import retrofit2.http.Query
  * Our Space Flight News Retrofit API. A concrete implementation of this interface is created as
  * part of dependency injection within the AppModule type.
  */
-interface SpaceFlightNewsApi {
+interface SpaceflightNewsApi {
 
     @GET("v4/articles/?format=json")
     suspend fun getArticles(

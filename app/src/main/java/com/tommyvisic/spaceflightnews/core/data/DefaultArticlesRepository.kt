@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import com.tommyvisic.spaceflightnews.core.data.local.ArticlesDatabase
 import com.tommyvisic.spaceflightnews.core.data.local.ToArticle
-import com.tommyvisic.spaceflightnews.core.data.remote.SpaceFlightNewsApi
+import com.tommyvisic.spaceflightnews.core.data.remote.SpaceflightNewsApi
 import com.tommyvisic.spaceflightnews.core.data.remote.toArticle
 import com.tommyvisic.spaceflightnews.core.model.Article
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +19,7 @@ import javax.inject.Inject
  * Our default implementation for the articles repository.
  */
 class DefaultArticlesRepository @Inject constructor (
-    private val spaceFlightNewsApi: SpaceFlightNewsApi,
+    private val spaceflightNewsApi: SpaceflightNewsApi,
     private val articlesDatabase: ArticlesDatabase
 ) : ArticlesRepository {
 
@@ -32,7 +32,7 @@ class DefaultArticlesRepository @Inject constructor (
      */
     override suspend fun getArticles(limit: Int, offset: Int): Result<List<Article>> =
         try {
-            val response = spaceFlightNewsApi.getArticles(limit, offset)
+            val response = spaceflightNewsApi.getArticles(limit, offset)
             Result.success(response.articleDtos.map { it.toArticle() })
         } catch (e: Exception) {
             e.printStackTrace()
@@ -45,7 +45,7 @@ class DefaultArticlesRepository @Inject constructor (
      */
     override fun observeArticles(): Flow<List<Article>> = flow {
         try {
-            val response = spaceFlightNewsApi.getArticles(10, 0)
+            val response = spaceflightNewsApi.getArticles(10, 0)
             emit(response.articleDtos.map { it.toArticle() })
         } catch (e: Exception) {
             e.printStackTrace()
@@ -69,7 +69,7 @@ class DefaultArticlesRepository @Inject constructor (
             articlesDatabase.getArticlesDao().pagingSource()
         },
         remoteMediator = ArticlesRemoteMediator(
-            spaceFlightNewsApi = spaceFlightNewsApi,
+            spaceflightNewsApi = spaceflightNewsApi,
             articlesDatabase = articlesDatabase
         )
     ).flow.map { pagingData -> pagingData.map { it.ToArticle() } } // <-- Map from entity to domain model

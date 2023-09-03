@@ -3,7 +3,7 @@ package com.tommyvisic.spaceflightnews.core.data
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.tommyvisic.spaceflightnews.core.data.remote.SpaceFlightNewsApi
+import com.tommyvisic.spaceflightnews.core.data.remote.SpaceflightNewsApi
 import com.tommyvisic.spaceflightnews.core.data.remote.toArticle
 import com.tommyvisic.spaceflightnews.core.model.Article
 
@@ -12,7 +12,7 @@ import com.tommyvisic.spaceflightnews.core.model.Article
  * before learning about  local database caching. Keeping this around as an example.
  */
 class RemoteArticlesPagingSource(
-    private val spaceFlightNewsApi: SpaceFlightNewsApi
+    private val spaceflightNewsApi: SpaceflightNewsApi
 ) : PagingSource<Int, Article>() {
 
     companion object {
@@ -37,7 +37,7 @@ class RemoteArticlesPagingSource(
             val limit = params.loadSize
             val offset = (page - 1) * params.loadSize
             Log.d("ArticlesPagingSource", "key = ${params.key},  page = $page, limit = $limit, offset = $offset")
-            val response = spaceFlightNewsApi.getArticles(limit, offset)
+            val response = spaceflightNewsApi.getArticles(limit, offset)
             val articles = response.articleDtos.map { it.toArticle() }
 
             LoadResult.Page(

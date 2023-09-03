@@ -10,7 +10,7 @@ import com.tommyvisic.spaceflightnews.core.data.local.ArticleEntity
 import com.tommyvisic.spaceflightnews.core.data.local.ArticlesDatabase
 import com.tommyvisic.spaceflightnews.core.data.local.RemoteKeyEntity
 import com.tommyvisic.spaceflightnews.core.data.local.toEntity
-import com.tommyvisic.spaceflightnews.core.data.remote.SpaceFlightNewsApi
+import com.tommyvisic.spaceflightnews.core.data.remote.SpaceflightNewsApi
 import com.tommyvisic.spaceflightnews.core.data.remote.toArticle
 import okio.IOException
 import retrofit2.HttpException
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit
  */
 @OptIn(ExperimentalPagingApi::class)
 class ArticlesRemoteMediator(
-    private val spaceFlightNewsApi: SpaceFlightNewsApi,
+    private val spaceflightNewsApi: SpaceflightNewsApi,
     private val articlesDatabase: ArticlesDatabase
 ) : RemoteMediator<Int, ArticleEntity>() {
 
@@ -85,7 +85,7 @@ class ArticlesRemoteMediator(
             val offset = (page - 1) * limit
 
             Log.d(LogTag, "Fetching articles from Space Flight API with limit $limit and offset $offset")
-            val response = spaceFlightNewsApi.getArticles(limit, offset)
+            val response = spaceflightNewsApi.getArticles(limit, offset)
             val articles = response.articleDtos.map { it.toArticle() }
 
             val endOfPaginationReached = articles.isEmpty()

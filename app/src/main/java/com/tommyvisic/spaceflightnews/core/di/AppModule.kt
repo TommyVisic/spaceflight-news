@@ -7,7 +7,7 @@ import com.tommyvisic.spaceflightnews.core.data.DefaultArticlesRepository
 import com.tommyvisic.spaceflightnews.core.data.local.ArticlesDao
 import com.tommyvisic.spaceflightnews.core.data.local.ArticlesDatabase
 import com.tommyvisic.spaceflightnews.core.data.local.RemoteKeysDao
-import com.tommyvisic.spaceflightnews.core.data.remote.SpaceFlightNewsApi
+import com.tommyvisic.spaceflightnews.core.data.remote.SpaceflightNewsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,9 +38,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSpaceFlightNewsApi(client: OkHttpClient): SpaceFlightNewsApi =
+    fun provideSpaceFlightNewsApi(client: OkHttpClient): SpaceflightNewsApi =
         Retrofit.Builder()
-            .baseUrl(SpaceFlightNewsApi.BaseUrl)
+            .baseUrl(SpaceflightNewsApi.BaseUrl)
             .addConverterFactory(MoshiConverterFactory.create())
             .client(client)
             .build()
@@ -66,7 +66,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideArticlesRepository(
-        spaceFlightNewsApi: SpaceFlightNewsApi,
+        spaceflightNewsApi: SpaceflightNewsApi,
         articlesDatabase: ArticlesDatabase
-    ): ArticlesRepository = DefaultArticlesRepository(spaceFlightNewsApi, articlesDatabase)
+    ): ArticlesRepository = DefaultArticlesRepository(spaceflightNewsApi, articlesDatabase)
 }
