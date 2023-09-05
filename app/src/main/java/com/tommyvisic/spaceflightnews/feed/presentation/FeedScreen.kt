@@ -2,6 +2,7 @@ package com.tommyvisic.spaceflightnews.feed.presentation
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -66,16 +67,15 @@ fun FeedScreen(
     viewModel: FeedViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
-    val lifecycle = LocalLifecycleOwner.current
     val articles = viewModel.articles.collectAsLazyPagingItems()
     val loadState = articles.loadState.mediator
 
-    // Subscribe to view model events that drive part of the UI.
-    LaunchedEffect(lifecycle) {
-        lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            viewModel.uiEvents.collect { event ->
-                when (event) {
-                    FeedUiEvent.Refresh -> articles.refresh()
+    // Subscribe to refresh events coming from the view model.
+    LaunchedEffect(viewModel) {
+        viewModel.uiEvents.collect { event ->
+            when (event) {
+                FeedUiEvent.Refresh -> {
+                    articles.refresh()
                 }
             }
         }
