@@ -52,10 +52,11 @@ import androidx.paging.compose.itemKey
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.tommyvisic.spaceflightnews.R
+import com.tommyvisic.spaceflightnews.core.presentation.TopBarConfig
 
 @Composable
 fun FeedScreen(
-    topBarActionsState: MutableState<@Composable RowScope.() -> Unit >,
+    onCreateTopBarConfig: (TopBarConfig) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: FeedViewModel = hiltViewModel(),
 ) {
@@ -72,16 +73,22 @@ fun FeedScreen(
         }
     }
 
-    // Set the actions we'd like to see for this screen.
+    // Call the onCreateTopBarConfig callback with the TopBarConfig object this screen would like to
+    // use.
     LaunchedEffect(Unit) {
-        topBarActionsState.value = {
-            IconButton(onClick = { viewModel.onRefresh() }) {
-                Icon(
-                    imageVector = Icons.Rounded.Refresh,
-                    contentDescription = stringResource(id = R.string.refresh)
-                )
-            }
-        }
+        onCreateTopBarConfig(
+            TopBarConfig(
+                title = { Text(text = stringResource(id = R.string.top_bar_title)) },
+                actions = {
+                    IconButton(onClick = { viewModel.onRefresh() }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Refresh,
+                            contentDescription = stringResource(id = R.string.refresh)
+                        )
+                    }
+                }
+            )
+        )
     }
 
     // Our main list of articles. Most of the UI for this screen is driven by this list. In
