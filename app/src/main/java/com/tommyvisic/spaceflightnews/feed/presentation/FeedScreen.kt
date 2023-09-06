@@ -74,9 +74,7 @@ fun FeedScreen(
     LaunchedEffect(viewModel) {
         viewModel.uiEvents.collect { event ->
             when (event) {
-                FeedUiEvent.Refresh -> {
-                    articles.refresh()
-                }
+                FeedUiEvent.Refresh -> articles.refresh()
             }
         }
     }
