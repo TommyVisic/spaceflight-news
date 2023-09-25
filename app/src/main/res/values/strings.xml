@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Spaceflight News</string>
-    <string name="top_bar_title">🚀 Spaceflight News 🚀</string>
+    <string name="top_bar_title">🚀 Spaceflight News</string>
     <string name="fetching_articles">🪐 Grabbing News…</string>
     <string name="error_getting_articles">⚠️ Error Getting News</string>
     <string name ="try_again">Try Again</string>
     <string name ="refresh">Refresh</string>
+    <string name ="feed">Feed</string>
+    <string name ="favorites">Favorites</string>
 </resources>

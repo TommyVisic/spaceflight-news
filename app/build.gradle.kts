@@ -72,8 +72,9 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
-    // Don't upgrade to 2.7.0 right now as it requires Android SDK 34
-    implementation("androidx.navigation:navigation-compose:2.6.0")
+    implementation("androidx.navigation:navigation-compose:2.7.2")
+    // For BottomNavigation
+    implementation("androidx.compose.material:material:1.5.1")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
